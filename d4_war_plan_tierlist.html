@@ -1,0 +1,92 @@
+
+<style>
+  .tl { padding: 1rem 0; font-family: var(--font-sans); }
+  .tier-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 8px; }
+  .tier-label { width: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; }
+  .cards { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 14px; min-width: 160px; flex: 1; cursor: pointer; transition: border-color 0.15s; }
+  .card:hover { border-color: var(--color-border-secondary); }
+  .card h3 { font-size: 14px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); }
+  .card p { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 6px; line-height: 1.5; }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); }
+  .s .tier-label { background: #FAC775; color: #633806; }
+  .a .tier-label { background: #9FE1CB; color: #085041; }
+  .b .tier-label { background: #B5D4F4; color: #0C447C; }
+  .d .tier-label { background: #F7C1C1; color: #791F1F; }
+  .detail { display: none; margin-top: 6px; padding-top: 6px; border-top: 0.5px solid var(--color-border-tertiary); }
+  .detail.open { display: block; }
+  .detail li { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; line-height: 1.4; }
+  .detail ul { margin: 0; padding-left: 16px; }
+  .rec { background: var(--color-background-info); color: var(--color-text-info); }
+  .skip { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .hint { font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 12px; }
+</style>
+<div class="tl">
+  <p class="hint">Tap any activity to see path tips</p>
+  <div class="tier-row s">
+    <div class="tier-label">S</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <h3>Helltides</h3>
+        <p>XP, Lair Keys, and Forgotten Souls all at once — best all-rounder.</p>
+        <span class="badge rec">Middle path</span>
+        <div class="detail"><ul><li>Spawns Maggots + Pang of Duriel from Hellwyrm ambushes</li><li>Maggots drop XP and Boss Trophies → Horadric Cube Uniques</li><li>Pang drops Lair Keys</li></ul></div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <h3>Kurast Undercity</h3>
+        <p>Fast runs, customizable rewards via Tributes. All 3 paths viable.</p>
+        <span class="badge rec">Left or Middle</span>
+        <div class="detail"><ul><li><b>Left:</b> Better end-of-run loot + Forgotten Souls on completion</li><li><b>Middle:</b> Unlocks Ancestral Armament tribute drops</li><li><b>Right:</b> More XP and Tributes — good if grinding levels</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="tier-row a">
+    <div class="tier-label">A</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <h3>Lair Bosses</h3>
+        <p>Fastest activity to complete. Best pathed mixed unless fully geared.</p>
+        <span class="badge rec">Middle or mixed</span>
+        <div class="detail"><ul><li><b>Middle:</b> Chain of bosses → massive Hoard Chests (best when geared)</li><li><b>Mixed:</b> Dip left/right to add specific bosses to other activities</li><li>Dog of Astaroth node = chance for Astaroth Uniques in Nightmare Dungeons</li></ul></div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <h3>Nightmare Dungeons</h3>
+        <p>Quick, accessible, and highest ceiling for rare loot.</p>
+        <span class="badge rec">Right path</span>
+        <div class="detail"><ul><li>Right path = Treasure Goblin focus</li><li>Rare chance at Mythic Uniques — best "highlight of the season" shot</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="tier-row b">
+    <div class="tier-label">B</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <h3>The Pit</h3>
+        <p>Nerfed this season. Run lower tiers quickly for Glyph XP and not much else.</p>
+        <div class="detail"><ul><li>Only meaningful reward is Glyph XP</li><li>Pick a low difficulty to speed through</li></ul></div>
+      </div>
+      <div class="card" onclick="toggle(this)">
+        <h3>Tree of Whispers</h3>
+        <p>Middle path has a chance to grant a Spark from Whisper Caches.</p>
+        <span class="badge rec">Middle path</span>
+        <div class="detail"><ul><li>Left branch of middle: bonus choices + Collection of Chaos upgrade</li><li>Right branch of middle: more materials</li><li>Either branch is fine — just reach the Spark node</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="tier-row d">
+    <div class="tier-label">D</div>
+    <div class="cards">
+      <div class="card" onclick="toggle(this)">
+        <h3>Infernal Hordes</h3>
+        <p>Skip if possible. If forced, left path is least painful.</p>
+        <span class="badge skip">Skip if possible</span>
+        <div class="detail"><ul><li>Left path: more Uniques from Bertuc, Talisman drops, choice of Obducite/Gem Fragments/Greater Hoard</li><li>Greater Hoard is the recommended pick on completion</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function toggle(el) {
+  el.querySelector('.detail').classList.toggle('open');
+}
+</script>
