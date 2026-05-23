@@ -1,92 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diablo 4: War Plan Reference Guide</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm 10mm;
+            background-color: #0f0f12;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
-<style>
-  .tl { padding: 1rem 0; font-family: var(--font-sans); }
-  .tier-row { display: flex; align-items: stretch; gap: 10px; margin-bottom: 8px; }
-  .tier-label { width: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; }
-  .cards { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
-  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 14px; min-width: 160px; flex: 1; cursor: pointer; transition: border-color 0.15s; }
-  .card:hover { border-color: var(--color-border-secondary); }
-  .card h3 { font-size: 14px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); }
-  .card p { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 6px; line-height: 1.5; }
-  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); }
-  .s .tier-label { background: #FAC775; color: #633806; }
-  .a .tier-label { background: #9FE1CB; color: #085041; }
-  .b .tier-label { background: #B5D4F4; color: #0C447C; }
-  .d .tier-label { background: #F7C1C1; color: #791F1F; }
-  .detail { display: none; margin-top: 6px; padding-top: 6px; border-top: 0.5px solid var(--color-border-tertiary); }
-  .detail.open { display: block; }
-  .detail li { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; line-height: 1.4; }
-  .detail ul { margin: 0; padding-left: 16px; }
-  .rec { background: var(--color-background-info); color: var(--color-text-info); }
-  .skip { background: var(--color-background-danger); color: var(--color-text-danger); }
-  .hint { font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 12px; }
-</style>
-<div class="tl">
-  <p class="hint">Tap any activity to see path tips</p>
-  <div class="tier-row s">
-    <div class="tier-label">S</div>
-    <div class="cards">
-      <div class="card" onclick="toggle(this)">
-        <h3>Helltides</h3>
-        <p>XP, Lair Keys, and Forgotten Souls all at once — best all-rounder.</p>
-        <span class="badge rec">Middle path</span>
-        <div class="detail"><ul><li>Spawns Maggots + Pang of Duriel from Hellwyrm ambushes</li><li>Maggots drop XP and Boss Trophies → Horadric Cube Uniques</li><li>Pang drops Lair Keys</li></ul></div>
-      </div>
-      <div class="card" onclick="toggle(this)">
-        <h3>Kurast Undercity</h3>
-        <p>Fast runs, customizable rewards via Tributes. All 3 paths viable.</p>
-        <span class="badge rec">Left or Middle</span>
-        <div class="detail"><ul><li><b>Left:</b> Better end-of-run loot + Forgotten Souls on completion</li><li><b>Middle:</b> Unlocks Ancestral Armament tribute drops</li><li><b>Right:</b> More XP and Tributes — good if grinding levels</li></ul></div>
-      </div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #d1d1de;
+            background-color: #0f0f12;
+            margin: 0;
+            padding: 0;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1c1a24 0%, #0d0c10 100%);
+            border-bottom: 2px solid #b33636;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .header h1 {
+            color: #f16969;
+            font-size: 20pt;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .header p {
+            color: #8a8a9e;
+            margin: 0;
+            font-size: 10pt;
+            font-style: italic;
+        }
+
+        .rules-container {
+            background-color: #16151c;
+            border-left: 4px solid #d97706;
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .rules-container h2 {
+            color: #f59e0b;
+            font-size: 12pt;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rules-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 6px;
+            color: #e2e8f0;
+        }
+        
+        .rules-list li strong {
+            color: #fbbf24;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-size: 13pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 25px 0 12px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #2d2b38;
+            page-break-after: avoid;
+        }
+
+        .grid {
+            display: block;
+        }
+
+        .card {
+            background-color: #14131a;
+            border: 1px solid #252330;
+            border-radius: 4px;
+            margin-bottom: 14px;
+            page-break-inside: avoid;
+        }
+
+        .card-header {
+            background-color: #1c1a26;
+            padding: 10px 14px;
+            border-bottom: 1px solid #252330;
+            display: table;
+            width: 100%;
+        }
+
+        .card-title {
+            display: table-cell;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #f3f4f6;
+        }
+        
+        .priority-1 .card-title { color: #f87171; }
+        .priority-2 .card-title { color: #fb923c; }
+        .priority-3 .card-title { color: #fbbf24; }
+        .priority-4 .card-title { color: #34d399; }
+        .priority-5 .card-title { color: #60a5fa; }
+        .priority-6 .card-title { color: #a78bfa; }
+
+        .card-badge {
+            display: table-cell;
+            text-align: right;
+            vertical-align: middle;
+            font-size: 8.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .card-body {
+            padding: 12px 14px;
+        }
+
+        .meta-line {
+            margin-bottom: 8px;
+            font-size: 9.5pt;
+        }
+
+        .meta-line strong {
+            color: #94a3b8;
+        }
+
+        .nodes-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .nodes-list li {
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        .nodes-list strong {
+            color: #f1f5f9;
+        }
+
+        .tip-box {
+            margin-top: 8px;
+            background-color: #1a1924;
+            border: 1px dashed #4b4763;
+            padding: 8px 12px;
+            border-radius: 3px;
+            font-size: 9pt;
+            color: #94a3b8;
+        }
+        
+        .tip-box strong {
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>War Plan Reference Guide</h1>
+        <p>Optimized paths &amp; breakpoints for Diablo 4: Lord of Hatred</p>
     </div>
-  </div>
-  <div class="tier-row a">
-    <div class="tier-label">A</div>
-    <div class="cards">
-      <div class="card" onclick="toggle(this)">
-        <h3>Lair Bosses</h3>
-        <p>Fastest activity to complete. Best pathed mixed unless fully geared.</p>
-        <span class="badge rec">Middle or mixed</span>
-        <div class="detail"><ul><li><b>Middle:</b> Chain of bosses → massive Hoard Chests (best when geared)</li><li><b>Mixed:</b> Dip left/right to add specific bosses to other activities</li><li>Dog of Astaroth node = chance for Astaroth Uniques in Nightmare Dungeons</li></ul></div>
-      </div>
-      <div class="card" onclick="toggle(this)">
-        <h3>Nightmare Dungeons</h3>
-        <p>Quick, accessible, and highest ceiling for rare loot.</p>
-        <span class="badge rec">Right path</span>
-        <div class="detail"><ul><li>Right path = Treasure Goblin focus</li><li>Rare chance at Mythic Uniques — best "highlight of the season" shot</li></ul></div>
-      </div>
+
+    <div class="rules-container">
+        <h2>The Golden Rules</h2>
+        <ul class="rules-list">
+            <li><strong>Rush XP Progression:</strong> Path through nodes to maximize War Plan tree XP. Ignore the raw node rewards—they pale in comparison to actual activity scaling, unless you hit a rare Mythic-tier reward.</li>
+            <li><strong>Reroll Bad Layouts:</strong> If a layout forces you into inefficient paths or layout-mandatory blocks, scrap it and generate a new plan.</li>
+            <li><strong>Skip Infernal Hordes:</strong> Do not run them. They consume too much time for negligible progression value this season. Avoid entirely.</li>
+        </ul>
     </div>
-  </div>
-  <div class="tier-row b">
-    <div class="tier-label">B</div>
-    <div class="cards">
-      <div class="card" onclick="toggle(this)">
-        <h3>The Pit</h3>
-        <p>Nerfed this season. Run lower tiers quickly for Glyph XP and not much else.</p>
-        <div class="detail"><ul><li>Only meaningful reward is Glyph XP</li><li>Pick a low difficulty to speed through</li></ul></div>
-      </div>
-      <div class="card" onclick="toggle(this)">
-        <h3>Tree of Whispers</h3>
-        <p>Middle path has a chance to grant a Spark from Whisper Caches.</p>
-        <span class="badge rec">Middle path</span>
-        <div class="detail"><ul><li>Left branch of middle: bonus choices + Collection of Chaos upgrade</li><li>Right branch of middle: more materials</li><li>Either branch is fine — just reach the Spark node</li></ul></div>
-      </div>
+
+    <div class="section-title">Activity Breakpoints &amp; Priorities</div>
+
+    <div class="grid">
+        <!-- Priority 1: Bosses -->
+        <div class="card priority-1">
+            <div class="card-header">
+                <div class="card-title">1. Bosses (5 Points Minimum)</div>
+                <div class="card-badge">Absolute Top Priority</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> Ultimate wealth and gearing engine. Spamming bosses without these nodes is massive resource griefing.</div>
+                <ul class="nodes-list">
+                    <li><strong>Nemesis Lairs (1-3 pts):</strong> Unlocks layered boss maps that spawn consecutive targets for massive high-quality loot streams and elevated Mythic Seal drops.</li>
+                    <li><strong>Lair of Plenty (Next 2 pts):</strong> Directly doubles the loot dropped on every single boss kill.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Priority 2: Pits -->
+        <div class="card priority-2">
+            <div class="card-header">
+                <div class="card-title">2. Pits (4 Points Minimum)</div>
+                <div class="card-badge">Essential Progression</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> Drastically cuts down glyph leveling times. These 4 points easily triple or quadruple your efficiency.</div>
+                <ul class="nodes-list">
+                    <li><strong>Current Haste &amp; Curt's Blessing:</strong> Provides multiple bonus glyph upgrade attempts at the end of each run.</li>
+                    <li><strong>Heart of the Stone &amp; Damn Thieves:</strong> Causes massive progression orbs to drop, effectively cutting map completion times in half.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Priority 3: Kurast Undercity -->
+        <div class="card priority-3">
+            <div class="card-header">
+                <div class="card-title">3. Kurast Undercity (4 Points Minimum)</div>
+                <div class="card-badge">Target Farming</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> The premier location to targeted-farm specific items like Mythics, Talismans, and Charms.</div>
+                <ul class="nodes-list">
+                    <li><strong>Gutterfilth (3 pts):</strong> Activates blue beacons that spawn Goblins. Critical for multiplying rare tribute run loot (potential for up to 4 Mythics per run).</li>
+                    <li><strong>Initiative (1 pt):</strong> Straight multiplier to overall baseline loot quantity.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Group Play Strategy:</strong> In a party, only the player hitting the blue beacons needs <em>Gutterfilth</em>. The player opening the actual tribute box only needs <em>Initiative</em>. Rotate roles to maximize points.
+                </div>
+            </div>
+        </div>
+
+        <!-- Priority 4: Helltides -->
+        <div class="card priority-4">
+            <div class="card-header">
+                <div class="card-title">4. Helltides (3 to 6 Points)</div>
+                <div class="card-badge">Target Leveling</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> Unmatched speeds for target character leveling.</div>
+                <ul class="nodes-list">
+                    <li><strong>Ramrod:</strong> Spawns maggots that drop hyper-dense XP orbs. The structural foundation of the Helltide strategy.</li>
+                    <li><strong>Meat Brothers:</strong> Spawns Butchers that drop <strong>Profane Mindcages</strong>. Stack these up to 3x to skyrocket monster level and XP yields.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Respect Optimization:</strong> Once you safely stockpile a deep stack of Mindcages (20–40), respect out of <em>Meat Brothers</em> and shift those points into monster density or power nodes for raw XP.
+                </div>
+            </div>
+        </div>
+
+        <!-- Priority 5: Nightmare Dungeons -->
+        <div class="card priority-5">
+            <div class="card-header">
+                <div class="card-title">5. Nightmare Dungeons (3 Points)</div>
+                <div class="card-badge">Material Farming</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> Generally low impact, but mandatory for harvesting materials required to roll the Vali.</div>
+                <ul class="nodes-list">
+                    <li><strong>Fearless Conviction + Nemesis:</strong> Amplifies elite pack sizes and forces significantly higher <strong>Primordial Dust</strong> drops per elite kill.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Priority 6: Tree of Whispers -->
+        <div class="card priority-6">
+            <div class="card-header">
+                <div class="card-title">6. Tree of Whispers</div>
+                <div class="card-badge">Passive Filler</div>
+            </div>
+            <div class="card-body">
+                <div class="meta-line"><strong>Why:</strong> Passively ticks up in the background. The actual choices here offer minimal scaling, so treat them as pure layout filler to bridge paths.</div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="tier-row d">
-    <div class="tier-label">D</div>
-    <div class="cards">
-      <div class="card" onclick="toggle(this)">
-        <h3>Infernal Hordes</h3>
-        <p>Skip if possible. If forced, left path is least painful.</p>
-        <span class="badge skip">Skip if possible</span>
-        <div class="detail"><ul><li>Left path: more Uniques from Bertuc, Talisman drops, choice of Obducite/Gem Fragments/Greater Hoard</li><li>Greater Hoard is the recommended pick on completion</li></ul></div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-function toggle(el) {
-  el.querySelector('.detail').classList.toggle('open');
-}
-</script>
+
+</body>
+</html>
